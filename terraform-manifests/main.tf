@@ -8,7 +8,6 @@ terraform {
       source  = "hashicorp/azuread"
       version = "~> 2.0"
     }
-
     random = {
       source  = "hashicorp/random"
       version = "~> 3.0"
@@ -16,10 +15,10 @@ terraform {
 }
 
     backend "azurerm" {
-      #resource_group_name   = "byterraapp-grp"
-      #storage_account_name  = "teraasa"
-      #container_name        = "prodtfstate"
-      #key                   = "terraform.tfstate"
+      resource_group_name   = "byterraapp-grp"
+      storage_account_name  = "teraasa"
+      container_name        = "prodtfstate"
+      key                   = "terraform.tfstate"
   }
 }
 provider "azurerm" {
