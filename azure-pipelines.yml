@@ -102,7 +102,7 @@ stages:
              allowTelemetryCollection: false
 - stage:
   jobs:
-  - job: Terraform Destroy
+  - job: TerraformDestroy
     steps:
     - task: TerraformCLI@2
       inputs:
