@@ -33,7 +33,7 @@ stages:
           command: 'init'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           backendType: 'azurerm'
-          backendServiceArm: 'aksterraformdevops'
+          backendServiceArm: 'devopsterra'
           backendAzureRmResourceGroupName: 'terraform-storage-rg'
           backendAzureRmStorageAccountName: 'mydevopsterra'
           backendAzureRmContainerName: 'tfstatefiles'
@@ -67,7 +67,7 @@ stages:
              command: 'init'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
              backendType: 'azurerm'
-             backendServiceArm: 'aksterraformdevops'
+             backendServiceArm: 'devopsterra'
              backendAzureRmResourceGroupName: 'terraform-storage-rg'
              backendAzureRmStorageAccountName: 'mydevopsterra'
              backendAzureRmContainerName: 'tfstatefiles'
@@ -78,7 +78,7 @@ stages:
            inputs:
              command: 'plan'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-             environmentServiceName: 'aksterraformdevops'
+             environmentServiceName: 'devopsterra'
              commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
          - task: TerraformCLI@2
@@ -86,8 +86,7 @@ stages:
            inputs:
              command: 'apply'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-             environmentServiceName: 'aksterraformdevops'
-             providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
+             environmentServiceName: 'devopsterra'
              commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
       
