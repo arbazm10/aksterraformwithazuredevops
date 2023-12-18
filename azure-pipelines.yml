@@ -100,27 +100,3 @@ stages:
              providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
              commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
-- stage:
-  jobs:
-  - job:
-    steps:
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/kubemanifests'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
-    - task: KubernetesManifest@1
-      inputs:
-        action: 'deploy'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'kubernetesdevops'
-        manifests: '$(Build.ArtifactStagingDirectory)/kubemanifests'
-        imagePullSecrets: 'kubernetesdevopssecret'
- 
-    - task: KubernetesManifest@1
-      inputs:
-        action: 'deploy'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'kubernetesdevops'
-        manifests: '$(Build.ArtifactStagingDirectory)/kubemanifests'
-        imagePullSecrets: 'kubernetesdevopssecret'
