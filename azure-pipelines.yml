@@ -100,7 +100,7 @@ stages:
              providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
              commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
-stage:
+- stage:
   jobs:
   - job: Terraform Destroy
     steps:
