@@ -17,13 +17,13 @@ stages:
     - job: TerraformValidateJob
       continueOnError: false
       steps:
-      - task: AzureCLI@2
-        inputs:
-          azureSubscription: 'devopsterra'
-          scriptType: 'bash'
-          scriptLocation: 'inlineScript'
-          inlineScript: 'az login'
-          addSpnToEnvironment: true
+      #- task: AzureCLI@2
+      #  inputs:
+       #   azureSubscription: 'devopsterra'
+        #  scriptType: 'bash'
+         # scriptLocation: 'inlineScript'
+          # inlineScript: 'az login'
+          # addSpnToEnvironment: true
       - task: PublishPipelineArtifact@1
         displayName: Publish Artifacts
         inputs:
@@ -41,6 +41,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           backendType: 'azurerm'
           backendServiceArm: 'devopsterra'
+          backendAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
           backendAzureRmResourceGroupName: 'terraform-storage-rg'
           backendAzureRmStorageAccountName: 'mydevopsterra'
           backendAzureRmContainerName: 'tfstatefiles'
@@ -75,6 +76,7 @@ stages:
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
              backendType: 'azurerm'
              backendServiceArm: 'devopsterra'
+             backendAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
              backendAzureRmResourceGroupName: 'terraform-storage-rg'
              backendAzureRmStorageAccountName: 'mydevopsterra'
              backendAzureRmContainerName: 'tfstatefiles'
@@ -86,6 +88,7 @@ stages:
              command: 'plan'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
              environmentServiceName: 'devopsterra'
+             providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
              commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
          - task: TerraformCLI@2
@@ -94,6 +97,7 @@ stages:
              command: 'apply'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
              environmentServiceName: 'devopsterra'
+             providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
              commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
       
