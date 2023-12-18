@@ -17,6 +17,13 @@ stages:
     - job: TerraformValidateJob
       continueOnError: false
       steps:
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'devopsterra'
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: 'az login'
+          addSpnToEnvironment: true
       - task: PublishPipelineArtifact@1
         displayName: Publish Artifacts
         inputs:
