@@ -117,4 +117,10 @@ stages:
         manifests: '$(Build.ArtifactStagingDirectory)/kubemanifests'
         imagePullSecrets: 'kubernetesdevopssecret'
  
-
+    - task: KubernetesManifest@1
+      inputs:
+        action: 'deploy'
+        connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'kubernetesdevops'
+        manifests: '$(Build.ArtifactStagingDirectory)/kubemanifests'
+        imagePullSecrets: 'kubernetesdevopssecret'
