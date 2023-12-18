@@ -40,10 +40,10 @@ terraform {
 # 2. Terraform Provider Block for AzureRM
 provider "azurerm" {
   features {}
-  subscription_id = "898734ae-50a5-4891-b151-0d0c58eaf0d6"
-  client_id       = "3866a430-e151-47f0-b582-2f1e5c4264f7"
-  client_secret   = "fc3e748d-63b6-41f9-8486-9837c56cd3c2"
-  tenant_id       = "945d465f-bcf2-485e-aefd-d714990419c0"
+  #subscription_id = "898734ae-50a5-4891-b151-0d0c58eaf0d6"
+  #client_id       = "3866a430-e151-47f0-b582-2f1e5c4264f7"
+  #client_secret   = "n4L8Q~LkOQoCbMoral-ufBbz-~9zaF_La-5A9bRP"
+  #tenant_id       = "945d465f-bcf2-485e-aefd-d714990419c0"
 }
 
 # 3. Terraform Resource Block: Define a Random Pet Resource
