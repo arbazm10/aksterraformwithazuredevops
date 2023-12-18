@@ -3,7 +3,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 variables:
 - name: DEV_ENVIRONMENT
@@ -26,7 +26,7 @@ stages:
       - task: TerraformInstaller@2
         displayName: Terraform Install
         inputs:
-          terraformVersion: '1.6.6'
+          terraformVersion: 'latest'
       - task: TerraformCLI@2
         displayName: Terraform Init
         inputs:
@@ -34,10 +34,10 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           backendType: 'azurerm'
           backendServiceArm: 'aksterraformdevops'
-          backendAzureRmResourceGroupName: 'byterraapp-grp'
-          backendAzureRmStorageAccountName: 'teraasa'
-          backendAzureRmContainerName: 'prodtfstate'
-          backendAzureRmKey: 'terraazuredevops.tfstate'
+          backendAzureRmResourceGroupName: 'terraform-storage-rg'
+          backendAzureRmStorageAccountName: 'mydevopsterra'
+          backendAzureRmContainerName: 'tfstatefiles'
+          backendAzureRmKey: 'terraazdevops.tfstate'
           allowTelemetryCollection: false
       - task: TerraformCLI@2
         displayName: Terraform Validate
@@ -68,9 +68,9 @@ stages:
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
              backendType: 'azurerm'
              backendServiceArm: 'aksterraformdevops'
-             backendAzureRmResourceGroupName: 'byterraapp-grp'
-             backendAzureRmStorageAccountName: 'teraasa'
-             backendAzureRmContainerName: 'prodtfstate'
+             backendAzureRmResourceGroupName: 'terraform-storage-rg'
+             backendAzureRmStorageAccountName: 'mydevopsterra'
+             backendAzureRmContainerName: 'tfstatefiles'
              backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
              allowTelemetryCollection: false
          - task: TerraformCLI@2
@@ -78,7 +78,7 @@ stages:
            inputs:
              command: 'plan'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-             environmentServiceName: 'terraform-aks-azurerm-svc-con'
+             environmentServiceName: 'aksterraformdevops'
              commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
          - task: TerraformCLI@2
