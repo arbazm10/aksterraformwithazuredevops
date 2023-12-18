@@ -33,7 +33,7 @@ stages:
           command: 'init'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           backendType: 'azurerm'
-          backendServiceArm: 'terraform-aks-azurerm-svc-con'
+          backendServiceArm: 'aksterraformdevops'
           backendAzureRmResourceGroupName: 'byterraapp-grp'
           backendAzureRmStorageAccountName: 'teraasa'
           backendAzureRmContainerName: 'prodtfstate'
@@ -67,7 +67,7 @@ stages:
              command: 'init'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
              backendType: 'azurerm'
-             backendServiceArm: 'terraform-aks-azurerm-svc-con'
+             backendServiceArm: 'aksterraformdevops'
              backendAzureRmResourceGroupName: 'byterraapp-grp'
              backendAzureRmStorageAccountName: 'teraasa'
              backendAzureRmContainerName: 'prodtfstate'
@@ -86,6 +86,8 @@ stages:
            inputs:
              command: 'apply'
              workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
+             environmentServiceName: 'aksterraformdevops'
+             providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
              commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
       
