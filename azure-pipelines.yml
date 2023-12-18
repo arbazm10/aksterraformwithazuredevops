@@ -68,7 +68,7 @@ stages:
            displayName: Download ssh key
            name: sshkey
            inputs:
-             secureFile: 'aks-terraform-devops-ssh-key-ubuntu.pub'
+             secureFile: 'key.pub'
          - task: TerraformCLI@2
            displayName: Terraform Init
            inputs:
