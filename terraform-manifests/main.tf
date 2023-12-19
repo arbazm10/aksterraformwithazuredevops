@@ -15,6 +15,7 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 2.0"
+
     }
     azuread = {
       source  = "hashicorp/azuread"
@@ -35,9 +36,6 @@ terraform {
     #key                   = "terraform-custom-vnet.tfstate"
   }  
 }
-
-
-
 # 2. Terraform Provider Block for AzureRM
 provider "azurerm" {
   features {}
@@ -50,4 +48,9 @@ provider "azurerm" {
 # 3. Terraform Resource Block: Define a Random Pet Resource
 resource "random_pet" "aksrandom" {
 
+}
+
+provider "kubernetes" {
+  config_path    = "~/.kube/config"
+  config_context = "my-context"
 }
