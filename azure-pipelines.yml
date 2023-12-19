@@ -100,14 +100,3 @@ stages:
              providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
              commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
              allowTelemetryCollection: false
-- stage:
-  jobs:
-  - job: TerraformDestroy
-    steps:
-    - task: TerraformCLI@2
-      inputs:
-        command: 'destroy'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
-        environmentServiceName: 'devopsterra'
-        providerAzureRmSubscriptionId: '898734ae-50a5-4891-b151-0d0c58eaf0d6'
-        allowTelemetryCollection: false
