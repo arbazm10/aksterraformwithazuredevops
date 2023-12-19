@@ -17,7 +17,7 @@ spec:
       spec:
       containers:
         - name: acrdemo-localdocker
-          image: myregistryterra.azurecr.io/kube-nginx-acr:v1
+          image: myregistryterra.azurecr.io/kube-nginx-acr
           imagePullPolicy: Always
           ports:
             - containerPort: 80
