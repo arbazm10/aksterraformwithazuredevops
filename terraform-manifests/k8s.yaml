@@ -14,9 +14,11 @@ spec:
       labels:
         app: app1-nginx
     spec:
+      spec:
       containers:
-        - name: app1-nginx
-          image: stacksimplify/kube-nginxapp1:1.0.0
+        - name: acrdemo-localdocker
+          image: myregistryterra.azurecr.io/kube-nginx-acr:v1
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 # To schedule pods on based on NodeSelectors
